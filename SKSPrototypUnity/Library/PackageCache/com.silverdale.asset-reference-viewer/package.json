@@ -1,0 +1,20 @@
+{
+  "name": "com.silverdale.asset-reference-viewer",
+  "version": "2.1.1",
+  "unity": "2020.1",
+  "displayName": "Asset Reference Viewer",
+  "keywords": [
+    "Project",
+    "Reference",
+    "Editor",
+    "Cleanup",
+    "Dependencies",
+    "Dependency"
+  ],
+  "description": "A convenient tool to help cleaning and maintaining Unity Projects",
+  "author": {
+    "name": "Silverdale",
+    "url": "https://github.com/Dasparion"
+  },
+  "_fingerprint": "623096f66e90726a2219910dd13d06f5b97054af"
+}
