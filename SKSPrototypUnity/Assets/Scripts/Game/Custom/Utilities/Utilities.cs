@@ -31,12 +31,12 @@ public enum EAxis
 
 namespace Ultra {
 	public class Utilities : Singelton<Utilities> {
-		public List<string> onScreenList = new List<string>();
 		public List<TimedMessage> onScreenListTimed = new List<TimedMessage>();
 		public GUIStyle style = new GUIStyle();
 		public int debugLevel = 100;
 		public DebugAreas debugAreas = (DebugAreas)(-1);
 		double debugTimeSlice = new();
+		string toBeDrawnStrings = "";
 
 		void Awake()
 		{
@@ -46,17 +46,25 @@ namespace Ultra {
 
 		void Update()
 		{
-			
-		}
+			List<int> toBeRemovedIndexes = new List<int>();
+			toBeDrawnStrings = "";
 
-		private void AddDebugText()
-		{
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-			if (onScreenListTimed.Count > 0 && onScreenList.Count <= 0)
+			for (int i = 0; i < onScreenListTimed.Count; i++)
 			{
-				DebugLogOnScreen(StringColor.Red + "Debug Log:" + StringColor.EndColor);
+				if (onScreenListTimed[i].DebugLevel <= this.debugLevel && (onScreenListTimed[i].DebugArea & this.debugAreas) == onScreenListTimed[i].DebugArea)
+				{
+					toBeDrawnStrings = toBeDrawnStrings + onScreenListTimed[i].Message + "\n";
+				}
+				onScreenListTimed[i].Time -= Time.deltaTime;
+				if (onScreenListTimed[i].Time < 0)
+					toBeRemovedIndexes.Add(i);
 			}
-#endif
+
+			for (int i = toBeRemovedIndexes.Count - 1; i >= 0; i--)
+			{
+				if (onScreenListTimed[toBeRemovedIndexes[i]] != null)
+					onScreenListTimed.RemoveAt(toBeRemovedIndexes[i]);
+			}
 		}
 
 		/// <summary>
@@ -120,43 +128,7 @@ namespace Ultra {
 		}
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
 		void OnGUI() {
-			//AddDebugText();
-			//await new WaitForEndOfFrame();
-			List<int> toBeRemovedIndexes = new List<int>();
-
-			for (int i = 0; i < onScreenListTimed.Count; i++)
-			{
-				if (onScreenListTimed[i].DebugLevel <= this.debugLevel && (onScreenListTimed[i].DebugArea & this.debugAreas) == onScreenListTimed[i].DebugArea)
-				{
-					GUI.Label(new Rect(10, 10 + i * style.fontSize, 1000f, 1000f), onScreenListTimed[i].Message, style);
-				}
-				onScreenListTimed[i].Time -= Time.deltaTime;
-				if (onScreenListTimed[i].Time < 0)
-					toBeRemovedIndexes.Add(i);
-			}
-
-			for (int i = toBeRemovedIndexes.Count - 1; i >= 0; i--)
-			{
-				if (onScreenListTimed[toBeRemovedIndexes[i]] != null)
-					onScreenListTimed.RemoveAt(toBeRemovedIndexes[i]);
-			}
-
-
-			GUI.Label(new Rect(10, 10, 1000f, 1000f), "Test \n Test \n Test \n Test \n Test", style);
-			// List is every second tick cleaned, don't know why
-			//if (onScreenListTimed.Count > 0) {
-			//	int j = 0;
-			//	for (int i = 0; i < onScreenListTimed.Count; i++) {
-			//		if (onScreenListTimed[i].DebugLevel <= this.debugLevel && (onScreenListTimed[i].DebugArea & this.debugAreas) == onScreenListTimed[i].DebugArea)
-			//		{
-			//			j++;
-			//			GUI.Label(new Rect(0, 0 + (onScreenList.Count + i) * style.fontSize, 1000f, 1000f), onScreenListTimed[i].Message);
-			//		}
-			//		onScreenListTimed[i].Time -= Time.deltaTime;
-			//		if (onScreenListTimed[i].Time <= 0) onScreenListTimed.RemoveAt(i);
-			//	}
-			//}
-			onScreenList.Clear();
+			GUI.Label(new Rect(10, 10, 1000f, 1000f), toBeDrawnStrings, style);
 		}
 #endif
 		public static bool IsNearlyEqual(float a, float b, float epsilon)

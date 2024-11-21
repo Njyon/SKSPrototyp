@@ -13,8 +13,8 @@ public class GameAssets : MonoBehaviour
 		{
 			if (instance == null)
 			{
-				//  Path: "Assets/Resources/Prefab/GameAssets"
-				instance = (Instantiate(Resources.Load("Prefab/GameAssets")) as GameObject).GetComponent<GameAssets>();
+				//  Path: "Assets/Prefab/Resources/GameAssets"
+				instance = (Instantiate(Resources.Load("GameAssets")) as GameObject).GetComponent<GameAssets>();
 				instance.name = ">> " + instance.name;
 			}
 			return instance;

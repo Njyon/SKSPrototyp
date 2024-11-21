@@ -73,3 +73,7 @@ crashlytics-build.properties
 
 # Files
 SKSPrototypUnity/Library/PackageCache/com.unity.burst/.Runtime/libburst-llvm-16.dylib
+SKSPrototypUnity/Library/ArtifactDB
+
+#Folders
+/SKSPrototypUnity/Library
