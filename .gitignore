@@ -2,13 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
-/SKSPrototypUnity/[Ll]ibrary/
-/SKSPrototypUnity/[Tt]emp/
-/SKSPrototypUnity/[Oo]bj/
-/SKSPrototypUnity/[Bb]uild/
-/SKSPrototypUnity/[Bb]uilds/
-/SKSPrototypUnity/[Ll]ogs/
-/SKSPrototypUnity/[Uu]ser[Ss]ettings/
+SKSPrototypUnity/Library/
+SKSPrototypUnity/Temp/
+SKSPrototypUnity/Obj/
+SKSPrototypUnity/Build/
+SKSPrototypUnity/Builds/
+SKSPrototypUnity/Logs/
+SKSPrototypUnity/UserSettings/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
