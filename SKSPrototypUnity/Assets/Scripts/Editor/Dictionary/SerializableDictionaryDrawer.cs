@@ -123,6 +123,9 @@ public class SerializableDictionaryDrawer : PropertyDrawer
 	{
 		keysProperty.arraySize++;
 		valuesProperty.arraySize++;
+
+		// Fix for enums cant beleave this worked lol (Enums NEED a Unknown state on 0 so this workes)
+		keysProperty.GetArrayElementAtIndex(keysProperty.arraySize - 1).enumValueFlag = 0;
 	}
 
 	public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
