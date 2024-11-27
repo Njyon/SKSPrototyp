@@ -1,18 +1,21 @@
 using Ultra;
 using UnityEngine;
 
-public class SKSUtilities : Singelton<SKSUtilities>
+namespace Ultra
 {
-    static UIManager uiManger;
-    public static UIManager UIManager
+    public class SKSUtilities : Singelton<SKSUtilities>
     {
-        get
-        {
-            if (uiManger == null)
-            {
-                uiManger = FindAnyObjectByType<UIManager>(); 
-            }
-            return uiManger;
-        }
-    }
+         static UIManager uiManger;
+         public static UIManager UIManager
+         {
+             get
+             {
+                 if (uiManger == null)
+                 {
+                     uiManger = FindAnyObjectByType<UIManager>(); 
+                 }
+                 return uiManger;
+             }
+         }
+	}
 }

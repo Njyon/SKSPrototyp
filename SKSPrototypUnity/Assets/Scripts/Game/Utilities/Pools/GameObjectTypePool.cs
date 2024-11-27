@@ -11,19 +11,17 @@ public class GameObjectTypePool<T> : PoolBase<T> where T : MonoBehaviour
 	{
 		this.instance = instance;
 		this.parent = parent;
-		SetupName();
 	}
 
 	public GameObjectTypePool(T instance, GameObject parent, int size) : base(size)
 	{
 		this.instance = instance;
 		this.parent = parent;
-		SetupName();
 	}
 
-	void SetupName()
+	void SetupName(GameObject g)
 	{
-		this.instance.name = ">> " + this.instance.name; // for Hirachy Visualization
+		g.name = ">> " + this.instance.name; // for Hirachy Visualization
 	}
 
 	public override T GetValue()
@@ -45,7 +43,7 @@ public class GameObjectTypePool<T> : PoolBase<T> where T : MonoBehaviour
 
 	protected override void DeactivateValue(T value)
 	{
-		value.transform.parent = Parent.transform;		// Bring them back to parent so they not get exedently Destroyed
+		value.transform.SetParent(Parent.transform, false);		// Bring them back to parent so they not get exedently Destroyed
 		value.gameObject.SetActive(false);
 	}
 
@@ -57,6 +55,7 @@ public class GameObjectTypePool<T> : PoolBase<T> where T : MonoBehaviour
 	protected override void SpawnValue()
 	{
 		T t = GameObject.Instantiate(instance, Parent.transform);
+		SetupName(t.gameObject);
 		stack.Push(t);
 		DeactivateValue(t);
 	}

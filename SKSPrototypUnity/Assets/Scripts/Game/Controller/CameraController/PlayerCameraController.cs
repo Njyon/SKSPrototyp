@@ -64,6 +64,11 @@ public class PlayerCameraController : MonoBehaviour
 		playerInputs = new InputSystem_Actions();
 		playerInputs.Enable();
 
+		/// Debug ///
+		playerInputs.Player.DebugLevelUp.performed += ctx => DebugUp();
+		playerInputs.Player.DebugLevelDown.performed += ctx => DebugDown();
+
+		/// Player Actions ///
 		//playerInputs.Player.MouseMove.performed += ctx => MousePos(ctx.ReadValue<Vector2>());
 		playerInputs.Player.Interact.performed += ctx => Interact(Input.mousePosition);
 
@@ -85,5 +90,17 @@ public class PlayerCameraController : MonoBehaviour
 		PlayerSelection.PointSelection(interactPos);
 	}
 
-	
+
+	//////////////////// DEBUG //////////////////////////
+
+	void DebugUp()
+	{
+		Ultra.Utilities.Instance.debugLevel += 100;
+	}
+	void DebugDown()
+	{
+		Ultra.Utilities.Instance.debugLevel -= 100;
+	}
+
+
 }

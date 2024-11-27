@@ -18,19 +18,17 @@ MonoBehaviour:
   icons:
     enabled: 1
     aligned: 0
-    pairs:
-    - iconToDraw: {fileID: 0}
-      targetClasses: []
+    pairs: []
   prefabsData:
-    enabled: 1
+    enabled: 0
     prefabs: []
   alternatingBackground:
     enabled: 1
-    color: {r: 0, g: 0, b: 0, a: 0.20784314}
+    color: {r: 0, g: 0, b: 0, a: 0.08}
   separator:
     enabled: 1
     startString: =
-    color: {r: 0, g: 0.93333316, b: 1, a: 0.15}
+    color: {r: 0, g: 1, b: 1, a: 0.15}
   tree:
     enabled: 1
     drawOverlayOnColoredPrefabs: 1
@@ -43,17 +41,17 @@ MonoBehaviour:
       - {r: 0.56, g: 0.44, b: 1, a: 1}
       - {r: 0.44, g: 0.71, b: 1, a: 1}
       - {r: 0.19, g: 0.53, b: 0.78, a: 1}
-      - {r: 0.13676381, g: 0.3846483, b: 0.56700003, a: 1}
-      - {r: 0.0755517, g: 0.2115448, b: 0.313, a: 1}
+      - {r: 0.10030261, g: 0.29254365, b: 0.4339623, a: 1}
+      - {r: 0.052287295, g: 0.15810527, b: 0.23584908, a: 1}
     - overlayColor: {r: 0.93, g: 1, b: 0.42, a: 0.04}
       colors:
       - {r: 0.93, g: 1, b: 0.42, a: 1}
       - {r: 1, g: 0.75, b: 0.42, a: 1}
       - {r: 1, g: 0.46, b: 0.31, a: 1}
       - {r: 1, g: 0.35, b: 0.34, a: 1}
-      - {r: 0.66, g: 0.23035298, b: 0.2251765, a: 1}
-      - {r: 0.383, g: 0.13450593, b: 0.12994641, a: 1}
+      - {r: 0.6132076, g: 0.20450583, b: 0.19958171, a: 1}
+      - {r: 0.3773585, g: 0.1252437, b: 0.12281951, a: 1}
   runTimeObjects:
     enabled: 1
     startString: '>'
-    color: {r: 1, g: 0.9027058, b: 0, a: 0.15}
+    color: {r: 0.9, g: 1, b: 0, a: 0.14117648}

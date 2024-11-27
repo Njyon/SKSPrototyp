@@ -62,6 +62,24 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DebugLevelUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""defe85a3-8010-4336-900c-7c55ea052bd3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugLevelDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""b68b5c02-68a8-4269-af8b-272b7989f212"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -249,6 +267,28 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0846c4ac-5b0e-4996-b09e-492d8102b708"",
+                    ""path"": ""<Keyboard>/numpad6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DebugLevelUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""000034c1-1390-4628-a2a4-8832981825fe"",
+                    ""path"": ""<Keyboard>/numpad4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DebugLevelDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -840,6 +880,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_MouseMove = m_Player.FindAction("MouseMove", throwIfNotFound: true);
+        m_Player_DebugLevelUp = m_Player.FindAction("DebugLevelUp", throwIfNotFound: true);
+        m_Player_DebugLevelDown = m_Player.FindAction("DebugLevelDown", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -923,6 +965,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_MouseMove;
+    private readonly InputAction m_Player_DebugLevelUp;
+    private readonly InputAction m_Player_DebugLevelDown;
     public struct PlayerActions
     {
         private @InputSystem_Actions m_Wrapper;
@@ -931,6 +975,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @MouseMove => m_Wrapper.m_Player_MouseMove;
+        public InputAction @DebugLevelUp => m_Wrapper.m_Player_DebugLevelUp;
+        public InputAction @DebugLevelDown => m_Wrapper.m_Player_DebugLevelDown;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -952,6 +998,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MouseMove.started += instance.OnMouseMove;
             @MouseMove.performed += instance.OnMouseMove;
             @MouseMove.canceled += instance.OnMouseMove;
+            @DebugLevelUp.started += instance.OnDebugLevelUp;
+            @DebugLevelUp.performed += instance.OnDebugLevelUp;
+            @DebugLevelUp.canceled += instance.OnDebugLevelUp;
+            @DebugLevelDown.started += instance.OnDebugLevelDown;
+            @DebugLevelDown.performed += instance.OnDebugLevelDown;
+            @DebugLevelDown.canceled += instance.OnDebugLevelDown;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -968,6 +1020,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MouseMove.started -= instance.OnMouseMove;
             @MouseMove.performed -= instance.OnMouseMove;
             @MouseMove.canceled -= instance.OnMouseMove;
+            @DebugLevelUp.started -= instance.OnDebugLevelUp;
+            @DebugLevelUp.performed -= instance.OnDebugLevelUp;
+            @DebugLevelUp.canceled -= instance.OnDebugLevelUp;
+            @DebugLevelDown.started -= instance.OnDebugLevelDown;
+            @DebugLevelDown.performed -= instance.OnDebugLevelDown;
+            @DebugLevelDown.canceled -= instance.OnDebugLevelDown;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1154,6 +1212,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnMouseMove(InputAction.CallbackContext context);
+        void OnDebugLevelUp(InputAction.CallbackContext context);
+        void OnDebugLevelDown(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
